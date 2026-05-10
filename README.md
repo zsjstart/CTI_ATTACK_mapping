@@ -95,8 +95,7 @@ Output:
 ## References
 
 [1] Filippo Morbiato, Markus Keller, Priya Nair, and Luca Romano.  
-*Hierarchical Retrieval Augmented Generation for Adversarial Technique Annotation in Cyber Threat Intelligence Text*. 2026.  
-DOI: 10.48550/arXiv.2604.14166
+*Hierarchical Retrieval Augmented Generation for Adversarial Technique Annotation in Cyber Threat Intelligence Text*. 2026. 
 
 ## License
 
