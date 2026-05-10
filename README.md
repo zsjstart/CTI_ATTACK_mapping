@@ -76,16 +76,6 @@ Output:
 }
 ```
 
----
-
-## Key Contributions
-
-- Reasoning-driven ATT&CK mapping
-- No fine-tuning or labeled training required
-- Handles ambiguity and multiple valid interpretations
-- Explainable mapping process
-- LLM-based post-evaluation for reasonable mismatches
-
   ---
   
 ## Key Insights
