@@ -14,7 +14,7 @@ We propose a lightweight reasoning-driven framework that:
 - uses prompt engineering only (no fine-tuning or RAG),
 - supports flexible and explainable mappings.
 
-Prior state-of-the-art ATT&CK mapping approaches generally report exact-match accuracies in the range of 60%–70% [1]. However, our framework achieves around **80% match accuracy** on MITRE CTI dataset. After post-evaluating mismatched predictions, many are found to be semantically reasonable, increasing the effective accuracy to approximately **90%**. 
+Prior state-of-the-art ATT&CK mapping approaches generally report exact-match accuracies in the range of 60%–70% [1]. In contrast, our framework achieves around **80% match accuracy** on MITRE CTI dataset. After post-evaluating mismatched predictions, many are found to be semantically reasonable, increasing the effective accuracy to approximately **90%**. 
 
 ---
 
@@ -29,7 +29,6 @@ LLM-Powered-ATTACK-Mapping/
 ├── scripts/
 │   ├── llm_mapping.py
 │   └── llm_mismatch_eva.py
-
 ```
 
 ---
@@ -37,8 +36,8 @@ LLM-Powered-ATTACK-Mapping/
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/attck-mapping-llm.git
-cd attck-mapping-llm
+git clone https://github.com/zsjstart/LLM-Powered-ATTACK-Mapping.git
+cd LLM-Powered-ATTACK-Mapping
 pip install -r requirements.txt
 ```
 
@@ -46,18 +45,21 @@ pip install -r requirements.txt
 
 ## Running
 
+
 ```bash
-python3 scripts/run_mapping.py \
-    --model gpt-5 \
-    --temperature 0.3 \
-    --input data/samples.json
+python3 scripts/llm_mapping.py \
+    --model openai/gpt-oss-120b \
+    --temper 0.3 \
+    --input Data/MITRE_CTI_Data.csv \
+    --limit 10 \
+    --output Results/llm_mapping_gpt_test.json
 ```
 
 ---
 
 ## Example
 
-Input behavior:
+Input behavior: 
 
 ```text
 can search for anti-virus products on the system
@@ -70,7 +72,7 @@ Output:
   "technique": [
     "T1518.001"
   ],
-  "reasoning": "The behavior explicitly searches for installed anti-virus products."
+  "reasoning": "Searching for anti-virus products matches Security Software Discovery, a sub‑technique of Software Discovery."
 }
 ```
 
@@ -85,23 +87,26 @@ Output:
 - LLM-based post-evaluation for reasonable mismatches
 
   ---
+  
 ## Key Insights
 
-- Smaller models achieve a relatively poor performance in ATT&CK mapping due to their internal limited domain knowledge, such as, nvidia/Llama-3.1-Nemotron-70B-Instruct-HF achieves 65% accuracy while Qwen/Qwen2.5-72B-Instruct exhibits 71% accuracy.
-- In contrast, larger models has sufficient inherent capability in handling this task without the reliance on external information, with openai/gpt-oss-120b achieves 80% accuracy (without including cases where its predictions are actually reasonable as well).
+- ATT&CK mapping is inherently ambiguous, and many behaviors may reasonably correspond to multiple techniques depending on interpretation granularity and analyst perspective.
+
+- Exact-match evaluation alone may underestimate mapping quality, as many mismatched predictions remain semantically reasonable. Many disagreements arise from differences in abstraction level (e.g., parent technique vs. sub-technique) rather than incorrect reasoning, suggesting that ATT&CK mapping should not be treated as a strict single-label classification problem.
+
+- Prompt engineering alone can enable competitive ATT&CK mapping performance without fine-tuning, supervised training, or retrieval augmentation.
+
+- Larger models appear to possess stronger implicit domain knowledge and reasoning capabilities for ATT&CK mapping, reducing reliance on external retrieval systems.
+
+- In contrast, smaller models still exhibit relatively weaker ATT&CK mapping performance. For example, Llama-3.1-Nemotron-70B-Instruct achieves around 65% accuracy, while Qwen2.5-72B-Instruct reaches approximately 71%.
 
 ---
 
 ## References
 
-```bibtex
-@article{morbiato2026hierarchical,
-  author = {Morbiato, Filippo and Keller, Markus and Nair, Priya and Romano, Luca},
-  title = {Hierarchical Retrieval Augmented Generation for Adversarial Technique Annotation in Cyber Threat Intelligence Text},
-  year = {2026},
-  doi = {10.48550/arXiv.2604.14166}
-}
-```
+[1] Filippo Morbiato, Markus Keller, Priya Nair, and Luca Romano.  
+*Hierarchical Retrieval Augmented Generation for Adversarial Technique Annotation in Cyber Threat Intelligence Text*. 2026.  
+DOI: 10.48550/arXiv.2604.14166
 
 ## License
 
