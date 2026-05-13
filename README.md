@@ -97,6 +97,10 @@ Output:
 [1] Filippo Morbiato, Markus Keller, Priya Nair, and Luca Romano.  
 *Hierarchical Retrieval Augmented Generation for Adversarial Technique Annotation in Cyber Threat Intelligence Text*. 2026. 
 
+
+## Other
+In another project, I open-sourced a lightweight LLM-powered CTI-to-ATT&CK pipeline that extracts adversary behaviors from Cyber Threat Intelligence (CTI) reports and maps them to MITRE ATT&CK techniques: https://github.com/zsjstart/LLM-Powered-CTI-ATTACK-Pipeline
+
 ## License
 
 MIT License
