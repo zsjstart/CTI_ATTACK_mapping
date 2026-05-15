@@ -45,10 +45,19 @@ pip install -r requirements.txt
 
 ## Running
 
-
+- Using local models such as gpt-oss-120b (downloadable from Hugging Face)
 ```bash
 python3 scripts/llm_mapping.py \
     --model openai/gpt-oss-120b \
+    --temper 0.3 \
+    --input Data/MITRE_CTI_Data.csv \
+    --limit 10 \
+    --output Results/llm_mapping_gpt_test.json
+```
+- Using commercial models such as gemini-2.5-flash
+```bash
+python3 scripts/llm_mapping.py \
+    --model models/gemini-2.5-flash \
     --temper 0.3 \
     --input Data/MITRE_CTI_Data.csv \
     --limit 10 \
